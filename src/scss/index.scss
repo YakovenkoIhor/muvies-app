@@ -1,2 +1,10 @@
 @import "~normalize.css";
+@import "./header";
+@import "./footer";
+@import "./movie";
 
+
+.popular {
+    display: flex;
+    flex-wrap: wrap;
+}
