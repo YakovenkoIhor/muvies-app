@@ -23,10 +23,55 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "API": () => (/* binding */ API),
-/* harmony export */   "API_KEY": () => (/* binding */ API_KEY)
+/* harmony export */   "API_KEY": () => (/* binding */ API_KEY),
+/* harmony export */   "popular": () => (/* binding */ popular),
+/* harmony export */   "top_rated": () => (/* binding */ top_rated),
+/* harmony export */   "upcoming": () => (/* binding */ upcoming)
 /* harmony export */ });
 const {API_KEY} = ({"API_KEY":"bea7f0b015caef1d59ccad6af5d23103"});
-const API = 'https://api.themoviedb.org/3'
+const API = 'https://api.themoviedb.org/3';
+const popular = '/movie/popular';
+const top_rated = '/movie/top_rated';
+const upcoming = '/movie/upcoming';
+
+
+/***/ }),
+
+/***/ "./js/helper.js":
+/*!**********************!*\
+  !*** ./js/helper.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "creatFetch": () => (/* binding */ creatFetch),
+/* harmony export */   "creatMovie": () => (/* binding */ creatMovie)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./js/utils.js");
+
+
+function creatMovie (data, className){
+    let movies = data.results.map(({poster_path, original_title, release_date, vote_average}) => (`
+        <div class="movie">
+            <img src="https://image.tmdb.org/t/p/w200${poster_path}" alt="${original_title}">
+            <div class="title">${original_title}</div>
+            <div class="date">${(0,_utils__WEBPACK_IMPORTED_MODULE_0__.convertDate)(release_date)}</div>
+            <div class="rate">${vote_average*10+'%'}</div>
+        </div>
+`)).join('');
+document.querySelector(className).innerHTML = movies
+}
+
+function creatFetch (el, className) {
+    fetch((0,_utils__WEBPACK_IMPORTED_MODULE_0__.generateUrl)(el))
+    .then(res => res.json())
+    .then(data => {
+    creatMovie (data, className)
+    })
+}
+
+    
 
 /***/ }),
 
@@ -37,25 +82,16 @@ const API = 'https://api.themoviedb.org/3'
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./js/utils.js");
+/* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./consts */ "./js/consts.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helper */ "./js/helper.js");
 
 
 
-fetch((0,_utils__WEBPACK_IMPORTED_MODULE_0__.generateUrl)('/movie/popular'))
-.then(res => res.json())
-.then(data => {
-    console.log(data);
-    const movies = data.results.map(({poster_path, original_title, release_date, popularity}) => (`
-    <div class="movie">
-        <img src="https://image.tmdb.org/t/p/w200${poster_path}" alt="${original_title}">
-        <div class="title">${original_title}</div>
-        <div class="date">${release_date}</div>
-        <div class="rate">${popularity}</div>
 
-    </div>
-    `)).join('');
-    document.querySelector('.popular').innerHTML = movies
-})
+
+(0,_helper__WEBPACK_IMPORTED_MODULE_1__.creatFetch)(_consts__WEBPACK_IMPORTED_MODULE_0__.popular, '.popular')
+;(0,_helper__WEBPACK_IMPORTED_MODULE_1__.creatFetch)(_consts__WEBPACK_IMPORTED_MODULE_0__.top_rated, '.top_rated')
+;(0,_helper__WEBPACK_IMPORTED_MODULE_1__.creatFetch)(_consts__WEBPACK_IMPORTED_MODULE_0__.upcoming, '.upcoming')
 
 /***/ }),
 
@@ -67,11 +103,13 @@ fetch((0,_utils__WEBPACK_IMPORTED_MODULE_0__.generateUrl)('/movie/popular'))
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "convertDate": () => (/* binding */ convertDate),
 /* harmony export */   "generateUrl": () => (/* binding */ generateUrl)
 /* harmony export */ });
 /* harmony import */ var _consts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./consts */ "./js/consts.js");
 
 const generateUrl = path => `${_consts__WEBPACK_IMPORTED_MODULE_0__.API}${path}?api_key=${_consts__WEBPACK_IMPORTED_MODULE_0__.API_KEY}`
+const convertDate = date => new Date(date).toDateString();
 
 /***/ })
 

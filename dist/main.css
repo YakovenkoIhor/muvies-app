@@ -354,15 +354,50 @@ template {
 /*!************************************************************************************************************!*\
   !*** css ../node_modules/css-loader/dist/cjs.js!../node_modules/sass-loader/dist/cjs.js!./scss/index.scss ***!
   \************************************************************************************************************/
+@font-face {
+  font-family: Montserrat;
+  src: local("Montserrat"), local("Montserrat"), url(1b9fba4a75b89b0dd96a.ttf);
+}
+body {
+  font-family: "Montserrat";
+}
+
 header {
-  background: yellow;
+  background: blue;
+  font-size: 30px;
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+footer {
+  background: gray;
+}
+
+.popular, .top_rated, .upcoming {
+  margin-top: 20px;
 }
 
 .movie {
   margin: 0 15px 25px 0;
+  position: relative;
+  max-width: 200px;
 }
 
-.popular {
+.rate {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 40px;
+  background: yellow;
+  border-radius: 23px;
+  text-align: center;
+}
+
+img {
+  border-radius: 20px;
+}
+
+.popular, .top_rated, .upcoming {
   display: flex;
   flex-wrap: wrap;
 }
