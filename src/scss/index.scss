@@ -1,16 +1,14 @@
-@font-face {
-    font-family: Montserrat;
-    src: local('Montserrat'), local('Montserrat'),
-        url("../assets/fonts/Montserrat-Black.ttf");
-}
-body { font-family: "Montserrat"}
-
 @import "~normalize.css";
 @import "./header";
 @import "./footer";
 @import "./movie";
+@import "./colors.scss";
+@import "./fonts.scss";
+@import "./global.scss";
+@import "./mixins.scss";
+@import "./movieDetails";
 
-.popular, .top_rated, .upcoming {
+.popular, .top_rated, .upcoming, .search {
     display: flex;
     flex-wrap: wrap;
 }

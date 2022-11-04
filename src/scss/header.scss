@@ -3,4 +3,11 @@ header {
     font-size: 30px;
     padding: 20px 0;
     margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+input, button {
+    border-radius: 20px;
+    border: none;
 }
