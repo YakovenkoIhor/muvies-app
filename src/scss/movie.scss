@@ -1,0 +1,23 @@
+.popular, .top_rated, .upcoming, .search{
+    margin-top: 20px;
+}
+
+.movie {
+    margin: 0 15px 25px 0;
+    position: relative;
+    max-width: 200px;
+}
+
+.rate{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 40px;
+    background: yellow;
+    border-radius: 23px;
+    text-align: center;
+}
+
+img {
+    border-radius: 20px;
+}
