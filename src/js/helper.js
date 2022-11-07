@@ -84,19 +84,25 @@ export const creatSearch = (movies, className) => (`
 </section>
 `) 
 
+export const getSearch = (formData) =>{
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${formData}`)
+    .then(res => res.json())
+    .then(data => {
+      const root = document.querySelector('#root')
+          if(data.success === false){
+              root.innerHTML = renderError(data)
+          }else{
+              location.hash = `search=${formData}`
+              root.innerHTML = creatSearch(data.results);
+          }
+    })
+  }
+
+
 document.getElementById('formElem').addEventListener('submit', (e) => {
   e.preventDefault();
-  const formData = new FormData(formElem);
-
-  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${formData.get('search')}`)
-  .then(res => res.json())
-  .then(data => {
-    const root = document.querySelector('#root')
-        if(data.success === false){
-            root.innerHTML = renderError(data)
-        }else{
-            root.innerHTML = creatSearch(data.results);
-        }
+  const formData = new FormData(formElem).get('search');
+  if(formData!==''){
+    getSearch(formData)
+  }
   })
-})
-

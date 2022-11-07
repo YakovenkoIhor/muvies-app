@@ -1,7 +1,7 @@
 import {popular} from "./consts";
 import {top_rated} from "./consts";
 import {upcoming} from "./consts";
-import {creatFetch, getMoviesDetails} from "./helper"
+import {creatFetch, getMoviesDetails, getSearch} from "./helper"
 
 checkUrl()
 
@@ -10,11 +10,16 @@ window.addEventListener('hashchange', (e) => {
 });
 
 function checkUrl(){
-    const [hash, movieId] = location.hash.split('=')
-if(hash === '#movieId'){
-    getMoviesDetails(movieId)
-}else{
-    creatFetch(popular, '.popular')
-    creatFetch(top_rated, '.top_rated')
-    creatFetch(upcoming, '.upcoming')
-}}
+    const [hash, movie] = location.hash.split('=')
+    
+    if(hash === '#movieId'){
+        getMoviesDetails(movie)
+    }else{
+        if(hash === '#search'){
+            getSearch(movie)
+        }
+        else{
+            creatFetch(popular, '.popular')
+            creatFetch(top_rated, '.top_rated')
+            creatFetch(upcoming, '.upcoming')
+}}}
